@@ -1,8 +1,8 @@
-# Your Name Here
+# Andrew Sharum
 # UWYO COSC 1010
-# Submission Date
-# Lab XX
-# Lab Section: 
+# 29OCT24
+# Lab 07
+# Lab Section: 11
 # Sources, people worked with, help given to: 
 # your
 # comments
@@ -17,9 +17,24 @@
     # If a user did not enter a number output a statement saying so
 # You will continue to prompt the user until a proper integer value is entered
 
-factorial = 1
+def calculate_factorial(n):
+    factorial = 1
+    while n > 0:
+        factorial *= n
+        n -= 1
+    return factorial
 
-print(f"The result of the factorial based on the given bound is {factorial}")
+while True:
+    user_input = input('Please enter a POSITIVE number for the factorial calculation: ')
+
+    if user_input.isdigit() and int(user_input) > 0:
+        upper_bound = int(user_input)
+        break
+    else:
+        print('That is not a valid positive number. Please try again. ')
+
+result = calculate_factorial(upper_bound)
+print(f"The result of the factorial based on the given bound is {result}")
 
 print("*"*75)
 # Create a while loop that prompts a user for input of an integer values
@@ -38,6 +53,18 @@ print("*"*75)
 # The sum should start at 0 
 
 num_sum = 0 
+
+while True:
+    user_input = input('Please enter a number. (type "exit" to stop)')
+
+    if user_input.lower() == 'exit':
+        break
+
+    if user_input.isdigit() or (user_input.startswith('-') and user_input[1:].isdigit()):
+        num_sum += int(user_input)
+    else:
+        print('That is not a valid number. Please try again.')
+
 
 print(f"Your final sum is {num_sum}")
 
@@ -58,5 +85,41 @@ print("*"*75)
     # So, it should function the same for `5 + 6` as `5+6`
 # Print the result of the equation
 # Again, loop through prompting the user for input until `exit` in any casing is input 
+
+# Remove any spaces in the input(s)
+def calculate_expression(expression):
+    
+    expression = expression.replace(' ', '')
+    
+    operators = ['+', '-', '*', '/', '%']
+    for operator in operators:
+        if operator in expression:
+            operands = expression.split(operator)
+            if len(operands) == 2 and operands[0].isdigit() and operands[1].isdigit():
+                num1 = int(operands[0])
+                num2 = int(operands[1])
+                if operator == '+':
+                    return num1 + num2
+                elif operator == '-':
+                    return num1 - num2
+                elif operator == '*':
+                    return num1 * num2
+                elif operator == '/':
+                    return num1 / num2
+                elif operator == '%':
+                    return num1 % num2
+    return None
+
+while True:
+    user_input = input('Please enter an equation. Acceptable operators are; (+, -, *, /, %)\n (or type "exit" to stop): ')
+    if user_input.lower() == 'exit':
+        break
+    
+    result = calculate_expression(user_input)
+    if result is not None:
+        print(f"The result of the equation is: {result}")
+    else:
+        print('That is not a valid equation. Please try again.')
+
 
         
